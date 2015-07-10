@@ -1,0 +1,24 @@
+{
+  "name": "Fontage",
+  "version": "1.0.0",
+  "description": "A CLI + JS app that helps you quickly see how batches of new fonts will look on your website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "font",
+    "fonts"
+  ],
+  "author": "Slaven Bacic <bacic.slaven@gmail.com>",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-coffee": "~0.13.0",
+    "grunt-contrib-watch": "~0.6.1"
+  },
+  "dependencies": {
+    "glob": "~5.0.13",
+    "adm-zip": "~0.4.7"
+  }
+}

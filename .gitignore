@@ -1,0 +1,6 @@
+*.sublime*
+node_modules
+nohup.out
+fonts
+fontageSwitcher.js
+fontage.css
