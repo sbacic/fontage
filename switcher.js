@@ -20,17 +20,18 @@ d)})}};d.fire=function(a,b,c){var d=document.createEvent("HTMLEvents");d.initEve
       var fonts, object;
       object = this;
       fonts = this.getFonts();
-      $('body').append('<input type="text" id="fontage" class="awesomplete" data-minchars="0" data-maxitems="100" style="display:none; font-size: 1.2em; padding: 0.2em;"/>');
-      $('#fontage').attr('data-list', fonts.join(', '));
-      $('#fontage').on('awesomplete-selectcomplete', function(e) {
+      document.querySelector('body').insertAdjacentHTML('beforeend', '<input type="text" id="fontage" class="awesomplete" data-minchars="0" data-maxitems="100" style="display:none; font-size: 1.2em; padding: 0.2em;"/>');
+      document.querySelector('#fontage').setAttribute('data-list', fonts.join(', '));
+      document.querySelector('#fontage').addEventListener('awesomplete-selectcomplete', function(e) {
         var font;
-        font = $('#fontage').val();
+        font = document.querySelector('#fontage').value;
         object.applyFont(object.element, "'" + font + "'");
-        return $("#fontage").hide();
-      }).on('focusout', function(e) {
-        return $("#fontage").hide();
+        return document.querySelector("#fontage").style.display = 'none';
       });
-      $('body').click(function(event) {
+      document.querySelector('#fontage').addEventListener('focusout', function(e) {
+        return document.querySelector("#fontage").style.display = 'none';
+      });
+      document.querySelector('body').addEventListener('click', function(event) {
         if (event.ctrlKey === true) {
           return object.toggleOn(event.target);
         }
@@ -72,28 +73,25 @@ d)})}};d.fire=function(a,b,c){var d=document.createEvent("HTMLEvents");d.initEve
     };
 
     FontageSwitcher.prototype.toggleOn = function(el) {
-      var pos;
+      var offset;
       this.element = el;
-      pos = $(el).offset();
-      $('div.awesomplete').css({
-        'position': 'absolute',
-        'top': pos.top + $(el).outerHeight() + 'px',
-        'left': pos.left + 'px'
-      });
-      $('#fontage').show();
-      return $('#fontage').focus();
+      offset = el.getBoundingClientRect();
+      document.querySelector('div.awesomplete').style.position = 'absolute';
+      console.log(offset);
+      document.querySelector('div.awesomplete').style.top = offset.top + offset.height + "px";
+      document.querySelector('div.awesomplete').style.left = offset.left + "px";
+      document.querySelector('#fontage').style.display = 'block';
+      return document.querySelector('#fontage').dispatchEvent(new Event('focus'));
     };
 
     FontageSwitcher.prototype.applyFont = function(target, font) {
-      return $(target).css('font-family', font);
+      return target.style.fontFamily = font;
     };
 
     return FontageSwitcher;
 
   })();
 
-  $(function() {
-    return new FontageSwitcher();
-  });
+  new FontageSwitcher();
 
 }).call(this);

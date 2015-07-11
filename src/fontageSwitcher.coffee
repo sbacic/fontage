@@ -6,17 +6,19 @@ class FontageSwitcher
         object = @
         fonts  = @getFonts()
 
-        $('body').append('<input type="text" id="fontage" class="awesomplete" data-minchars="0" data-maxitems="100" style="display:none; font-size: 1.2em; padding: 0.2em;"/>')
-        $('#fontage').attr('data-list', fonts.join(', '))    
-        $('#fontage').on('awesomplete-selectcomplete', (e)->
-            font = $('#fontage').val()
+        document.querySelector('body').insertAdjacentHTML('beforeend', '<input type="text" id="fontage" class="awesomplete" data-minchars="0" data-maxitems="100" style="display:none; font-size: 1.2em; padding: 0.2em;"/>'
+        )    
+        document.querySelector('#fontage').setAttribute('data-list', fonts.join(', '))    
+        document.querySelector('#fontage').addEventListener('awesomplete-selectcomplete', (e)->
+            font = document.querySelector('#fontage').value
             object.applyFont(object.element, "'" + font + "'")
-            $("#fontage").hide()
-        ).on('focusout', (e)->
-            $("#fontage").hide()
+            document.querySelector("#fontage").style.display = 'none'
+        )
+        document.querySelector('#fontage').addEventListener('focusout', (e)->
+            document.querySelector("#fontage").style.display = 'none'
         ) 
 
-        $('body').click (event)->
+        document.querySelector('body').addEventListener 'click', (event)->
             if event.ctrlKey == true
                 object.toggleOn(event.target)
 
@@ -36,18 +38,16 @@ class FontageSwitcher
 
     toggleOn : (el)->
         @element = el
-        pos      = $(el).offset()
-        $('div.awesomplete').css({
-            'position' : 'absolute',
-            'top' : pos.top + $(el).outerHeight() + 'px', 
-            'left' : pos.left + 'px'
-        })
-        $('#fontage').show()
-        $('#fontage').focus()
+        offset   = el.getBoundingClientRect()
+
+        document.querySelector('div.awesomplete').style.position = 'absolute' 
+        document.querySelector('div.awesomplete').style.top      = offset.top + offset.height + "px"
+        document.querySelector('div.awesomplete').style.left     = offset.left + "px"
+
+        document.querySelector('#fontage').style.display = 'block'
+        document.querySelector('#fontage').dispatchEvent(new Event('focus'))
         
     applyFont : (target, font)->
-        $(target).css('font-family', font)
+        target.style.fontFamily = font
 
-
-$ ()->           
-    new FontageSwitcher()
+new FontageSwitcher()

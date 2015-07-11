@@ -28,10 +28,10 @@ class Fontage
         if ('--print' in args)
             console.log "\n" + @globFonts() + "\n" #only prints CSS font styles
         else 
-            css = @globFonts() + fs.readFileSync('src/awesomplete/awesomplete.css', "utf8") 
-            js  = fs.readFileSync('src/awesomplete/awesomplete.min.js', "utf8") + fs.readFileSync('fontageSwitcher.js', "utf8")       
-            fs.writeFileSync('fontage.css', css) 
-            fs.writeFileSync('switcher.js', js)
+            css = @globFonts() + fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.css'), "utf8") 
+            js  = fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.min.js'), "utf8") + fs.readFileSync(path.join(__dirname, 'fontageSwitcher.js'), "utf8")       
+            fs.writeFileSync(path.join(__dirname, 'fontage.css'), css) 
+            fs.writeFileSync(path.join(__dirname,'switcher.js'), js)
 
         if ('--silent' not in args)
             @printInstructions()   
@@ -57,7 +57,6 @@ class Fontage
 
     printInstructions : ()->
         console.log "Fontage has finished succesfully! Add this to the bottom of your .html file to start playing with your fonts:\n\n
-        <script src=\"//code.jquery.com/jquery-1.10.2.js\"></script>\n
         <link rel=\"stylesheet\" href=\"fontage.css\" />\n
         <script src=\"switcher.js\"></script>\n
         "

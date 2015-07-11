@@ -1,7 +1,11 @@
 (function() {
-  var fontage;
+  var fontage, fs, path;
 
-  fontage = require('./fontage');
+  path = require('path');
+
+  fs = require('fs');
+
+  fontage = require(path.join(path.dirname(fs.realpathSync(__filename)), './fontage.js'));
 
   new fontage();
 

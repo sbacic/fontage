@@ -42,10 +42,10 @@
       if ((indexOf.call(args, '--print') >= 0)) {
         console.log("\n" + this.globFonts() + "\n");
       } else {
-        css = this.globFonts() + fs.readFileSync('src/awesomplete/awesomplete.css', "utf8");
-        js = fs.readFileSync('src/awesomplete/awesomplete.min.js', "utf8") + fs.readFileSync('fontageSwitcher.js', "utf8");
-        fs.writeFileSync('fontage.css', css);
-        fs.writeFileSync('switcher.js', js);
+        css = this.globFonts() + fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.css'), "utf8");
+        js = fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.min.js'), "utf8") + fs.readFileSync(path.join(__dirname, 'fontageSwitcher.js'), "utf8");
+        fs.writeFileSync(path.join(__dirname, 'fontage.css'), css);
+        fs.writeFileSync(path.join(__dirname, 'switcher.js'), js);
       }
       if ((indexOf.call(args, '--silent') < 0)) {
         this.printInstructions();
@@ -90,7 +90,7 @@
     };
 
     Fontage.prototype.printInstructions = function() {
-      return console.log("Fontage has finished succesfully! Add this to the bottom of your .html file to start playing with your fonts:\n\n <script src=\"//code.jquery.com/jquery-1.10.2.js\"></script>\n <link rel=\"stylesheet\" href=\"fontage.css\" />\n <script src=\"switcher.js\"></script>\n");
+      return console.log("Fontage has finished succesfully! Add this to the bottom of your .html file to start playing with your fonts:\n\n <link rel=\"stylesheet\" href=\"fontage.css\" />\n <script src=\"switcher.js\"></script>\n");
     };
 
     Fontage.prototype.generateCSS = function(font) {

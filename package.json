@@ -6,6 +6,7 @@
   "scripts": {
     "test": "test"
   },
+  "bin": "./index.js",
   "keywords": [
     "font",
     "fonts"
