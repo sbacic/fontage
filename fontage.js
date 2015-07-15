@@ -42,10 +42,10 @@
       if ((indexOf.call(args, '--print') >= 0)) {
         console.log("\n" + this.globFonts() + "\n");
       } else {
-        css = this.globFonts() + fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.css'), "utf8");
-        js = fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.min.js'), "utf8") + fs.readFileSync(path.join(__dirname, 'fontageSwitcher.js'), "utf8");
-        fs.writeFileSync(path.join(__dirname, 'fontage.css'), css);
-        fs.writeFileSync(path.join(__dirname, 'switcher.js'), js);
+        css = this.globFonts() + fs.readFileSync(path.join(__dirname, 'src/awesomplete/awesomplete.css'), "utf8");
+        js = fs.readFileSync(path.join(__dirname, 'src/awesomplete/awesomplete.min.js'), "utf8") + fs.readFileSync(path.join(__dirname, 'fontageSwitcher.js'), "utf8");
+        fs.writeFileSync(path.join('.', 'fontage.css'), css);
+        fs.writeFileSync(path.join('.', 'switcher.js'), js);
       }
       if ((indexOf.call(args, '--silent') < 0)) {
         this.printInstructions();

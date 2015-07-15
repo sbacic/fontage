@@ -1,12 +1,10 @@
-(function() {
-  var fontage, fs, path;
+#!/usr/bin/env node
 
-  path = require('path');
+var fontage, fs, path;
 
-  fs = require('fs');
+path    = require('path');
+fs      = require('fs');
+fontage = require(path.join(path.dirname(fs.realpathSync(__filename)), './fontage.js'));
 
-  fontage = require(path.join(path.dirname(fs.realpathSync(__filename)), './fontage.js'));
+new fontage();
 
-  new fontage();
-
-}).call(this);

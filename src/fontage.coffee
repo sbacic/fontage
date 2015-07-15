@@ -28,10 +28,10 @@ class Fontage
         if ('--print' in args)
             console.log "\n" + @globFonts() + "\n" #only prints CSS font styles
         else 
-            css = @globFonts() + fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.css'), "utf8") 
-            js  = fs.readFileSync(path.join(__dirname, 'awesomplete/awesomplete.min.js'), "utf8") + fs.readFileSync(path.join(__dirname, 'fontageSwitcher.js'), "utf8")       
-            fs.writeFileSync(path.join(__dirname, 'fontage.css'), css) 
-            fs.writeFileSync(path.join(__dirname,'switcher.js'), js)
+            css = @globFonts() + fs.readFileSync(path.join(__dirname, 'src/awesomplete/awesomplete.css'), "utf8") 
+            js  = fs.readFileSync(path.join(__dirname, 'src/awesomplete/awesomplete.min.js'), "utf8") + fs.readFileSync(path.join(__dirname, 'fontageSwitcher.js'), "utf8")       
+            fs.writeFileSync(path.join('.', 'fontage.css'), css) 
+            fs.writeFileSync(path.join('.', 'switcher.js'), js)
 
         if ('--silent' not in args)
             @printInstructions()   
