@@ -1,5 +1,5 @@
 {
-  "name": "Fontage",
+  "name": "fontage",
   "version": "1.0.0",
   "description": "A CLI + JS app that helps you quickly see how batches of new fonts will look on your website.",
   "main": "index.js",

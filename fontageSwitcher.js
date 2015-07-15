@@ -1,9 +1,7 @@
 (function() {
-  var FontageSwitcher;
+  var FontageSwitcher, foobar;
 
   FontageSwitcher = (function() {
-    FontageSwitcher.prototype.fonts = [];
-
     FontageSwitcher.prototype.element = 'body';
 
     function FontageSwitcher() {
@@ -23,14 +21,15 @@
       });
       document.querySelector('body').addEventListener('click', function(event) {
         if (event.ctrlKey === true) {
-          return object.toggleOn(event.target);
+          return object.toggleOn(event);
         }
       });
     }
 
     FontageSwitcher.prototype.getFonts = function() {
-      var all, font, i, j, k, len, len1, len2, ref, rule, rules, sheet;
+      var all, font, fonts, i, j, k, len, len1, len2, ref, rule, rules, sheet;
       all = [];
+      fonts = [];
       ref = (function() {
         var j, len, ref, results;
         ref = document.styleSheets;
@@ -53,22 +52,26 @@
       });
       for (k = 0, len2 = all.length; k < len2; k++) {
         font = all[k];
-        this.fonts.push(font.style.fontFamily.replace(/'/g, ''));
+        fonts.push(font.style.fontFamily.replace(/'/g, ''));
       }
-      return this.fonts;
+      fonts = fonts.filter((function(_this) {
+        return function(item, pos) {
+          return fonts.indexOf(item) === pos;
+        };
+      })(this));
+      return fonts.sort();
     };
 
     FontageSwitcher.prototype._getStylesheets = function(sheet) {
       return sheet.rules || sheet.cssRules || [];
     };
 
-    FontageSwitcher.prototype.toggleOn = function(el) {
-      var offset;
-      this.element = el;
-      offset = el.getBoundingClientRect();
-      document.querySelector('div.awesomplete').style.position = 'absolute';
-      document.querySelector('div.awesomplete').style.top = offset.top + offset.height + "px";
-      document.querySelector('div.awesomplete').style.left = offset.left + "px";
+    FontageSwitcher.prototype.toggleOn = function(e) {
+      this.element = e.target;
+      document.querySelector('div.awesomplete').style.zIndex = '99';
+      document.querySelector('div.awesomplete').style.position = 'fixed';
+      document.querySelector('div.awesomplete').style.top = e.clientY + "px";
+      document.querySelector('div.awesomplete').style.left = e.clientX + "px";
       document.querySelector('#fontage').style.display = 'block';
       return document.querySelector('#fontage').dispatchEvent(new Event('focus'));
     };
@@ -81,6 +84,6 @@
 
   })();
 
-  new FontageSwitcher();
+  foobar = new FontageSwitcher();
 
 }).call(this);

@@ -32,6 +32,11 @@ CLI Flags
 
 `--silent` Do not print further instructions. Useful if you're automating and only want errors outputed to stdout.
 
+FAQ
+--
++ __I am only seeing Helvetica in the suggestion box, what gives?__
+Helvetica is a hardcoded font - it's written into the code. If Helvetica is shown among the suggestions, it means that the script is working properly. If no other fonts are shown and you're sure they are there, it is probably a problem with your cross domain policy.
+
 LICENSE
 --
 MIT
